@@ -82,7 +82,7 @@ Search is an integrated part of the DSE platform. Only a single line of code is 
 
 `CREATE SEARCH INDEX IF NOT EXISTS ON dsbank.transactions;`
 
-Once search is enabled, the query flexibility increases greatly. We can now search on any par of the record. To leverage search use the solr_query predicate as part of the where clause.
+Once search is enabled, the query flexibility increases greatly. We can now search on any part of the record. To leverage search use the solr_query predicate as part of the where clause.
 
 To search for the sum amount of all transactions at Macys in Atlanta:
 
