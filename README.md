@@ -35,10 +35,10 @@ The use keyspace command can set the default keyspace for the session:
 
 # Create a DSE table
 
-To create a table with CQL, the developer will issue commands very similar to SQL. A Create TABLE statement is used, columns are defined with data types, and some distribution model is determined by the primary key. Additionally, clustering columns determine the sort order of the data. In this example, our PRIMARY KEY is cc_no and transaction_time. This combination is a unique identifier for each row of data. The data is then stored DESC by transaction_time since most queries will want the latest transactions to appear first.
+To create a table with CQL, the developer will issue commands very similar to SQL. A CREATE TABLE statement is used, columns are defined with data types, and some data distribution model is determined by the primary key (PK). Additionally, clustering columns (CK) determine the sort order of the data. In this example, our PK is cc_no and transaction_time. This combination is a unique identifier for each row of data. The data is then stored DESC by the CK transaction_time since most queries will want the latest transactions to appear first.
 
 Some rules to remember when creating a table in DSE:
-* Every row in a DSE table must contain a unique primary key. The PK determines the primary key. 
+* Every row in a DSE table must contain a unique primary key.
 * Distribution of data is automatically controlled though PK.
 * The data can also be sorted with clustering columns (CK).
 
