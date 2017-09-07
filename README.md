@@ -42,7 +42,8 @@ Some rules to remember when creating a table in DSE:
 * Distribution of data is automatically controlled though PK.
 * The data can also be sorted with clustering columns (CK).
 
-```CREATE TABLE dsbank.transactions (
+```
+CREATE TABLE dsbank.transactions (
     cc_no text,
     transaction_time timestamp,
     amount double,
