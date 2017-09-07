@@ -1,14 +1,14 @@
 # What is DSE Core and DSE Search?
 
-* DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup. DSE contain an easy to use, powerful data manipulation language called CQL which shares a lot of syntactical language freatures of SQL.
+* DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup. DSE contain an easy to use, powerful data manipulation language called CQL which shares a lot of syntactical language features of SQL.
 * DSE Search is an integrated search engine that automatically sync with DML and requires no ETL.
 Enable real-time search with a single command
   * Search indexes are maintained with every insert, update, and delete operation.
   * Text/Fuzzy search, Faceting, Geospatial, Type ahead
 
-# Dataset used for the exmaple
+# Dataset used for the example
 
-The dataset used for this example is simulated credit card tansaction data. The columns are credit card number, tansaction time, amount, items, location, merchant, notes, status, tag, transaction ID, and user ID.
+The dataset used for this example is simulated credit card transaction data. The columns are credit card number, transaction time, amount, items, location, merchant, notes, status, tag, transaction ID, and user ID.
 
 Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1OZ0k/view?usp=sharing
 ** note this needs to move so people can access outside of DSE G Drive **
@@ -25,7 +25,7 @@ Once DSE has started, invoke the cqlsh client to interact with the database:
 
 # Creating Schema with the the CREATE KEYSPACE command
 
-Keyspaces (or schemas) are the highest-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed (in which data centers, geographic or cloud), and Also the level of replication and fault-tolernace the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
+Keyspaces (or schemas) are the highest-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed (in which data centers, geographic or cloud), and Also the level of replication and fault-tolerance the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
 
 `CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
 
@@ -35,9 +35,9 @@ The use keyspace command can set the default keyspace for the session:
 
 # Create a DSE table
 
-To create a table with CQL, the developer will issues commands very similar to SQL. A Create TABLE statement is used, columns are defined with data types, and some distribution model is determined by the primamry key. Aditionally, clustering columns determine the sort order of the data. In this example, our PRIMARY KEY is cc_no and transaction_time. This combination is a unique indentifer for each row of data. The data is then stored DESC by transaction_time since most queries will want the latest transcations to appear first.
+To create a table with CQL, the developer will issue commands very similar to SQL. A Create TABLE statement is used, columns are defined with data types, and some distribution model is determined by the primary key. Additionally, clustering columns determine the sort order of the data. In this example, our PRIMARY KEY is cc_no and transaction_time. This combination is a unique identifier for each row of data. The data is then stored DESC by transaction_time since most queries will want the latest transactions to appear first.
 
-Some  rules to remeber when creating a table in DSE:
+Some rules to remember when creating a table in DSE:
 * Every row in a DSE table must contain a unique primary key. The PK determines the primary key. 
 * Distribution of data is automatically controlled though PK.
 * The data can also be sorted with clustering columns (CK).
@@ -60,13 +60,13 @@ Some  rules to remeber when creating a table in DSE:
 
 # Copying data into the table
 
-DSE has several mechanisms for data ingest. This example uses the COPY command to import the CSV file. With COPY, the target table is named, the columns structre is defined, and the source file is provided. Note, in this example, the data has a column hearder which is handled with the HEADER = TURE option.
+DSE has several mechanisms for data ingest. This example uses the COPY command to import the CSV file. With COPY, the target table is named, the columns structure is defined, and the source file is provided. Note, in this example, the data has a column header which is handled with the HEADER = TURE option.
 
 `COPY dsbank.transactions (cc_no, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
 
 # Querying data with CQL
 
-Querying data with CQL is very similmar to SQL. Data should be located using the PK and/or CK. The database is designed for fast lookup and transactions based on the PK.
+Querying data with CQL is very similar to SQL. Data should be located using the PK and/or CK. The database is designed for fast lookup and transactions based on the PK.
 
 To select the transactions for a specific credit card:
 
@@ -78,11 +78,11 @@ To count all transactions within a range of transaction_time:
 
 # Enabling Search
 
-Search is an integrated part of the DSE platfrom. Only a single line of code is required to enable search.
+Search is an integrated part of the DSE platform. Only a single line of code is required to enable search:
 
 `CREATE SEARCH INDEX IF NOT EXISTS ON dsbank.transactions;`
 
-Once search is enabled, the query flexability increases greatly. We can now search on any par of the record. To leverage serarch use the solr_query predicate as part of the where clause.
+Once search is enabled, the query flexibility increases greatly. We can now search on any par of the record. To leverage search use the solr_query predicate as part of the where clause.
 
 To search for the sum amount of all transactions at Macys in Atlanta:
 
@@ -94,20 +94,21 @@ To search all cancelled transactions:
 
 # Real-time search
 
-As records are inserted, updated, or deleted the search indexes are automitcally updated.
+As records are inserted, updated, or deleted the search indexes are automatically updated.
 
 Let's search for any merchants that are McDonalds. Note there are 0 records returned.
 
 `select * from transactions where solr_query='merchant:mcdonalds';`
 
-Now insert a record with a merchant of MCDonalds:
+Now insert a record with a merchant of McDonalds:
 
 `INSERT INTO dsbank.transactions (cc_no, transaction_time, amount, location, merchant, notes, transaction_id, user_id)
   VALUES ('1234123412341240','2017-09-06 16:31:46.959+0000',58.32,'Tampa','McDonalds','HouseHold','31f4d4cc-8519-4982-be7b-b8aa06523ae3','banderson');`
 
-Run the search query again and the newly inserted record will apppear:
+Run the search query again and the newly inserted record will appear:
 
 `select * from transactions where solr_query='merchant:mcdonalds';`
+
 
 
 
