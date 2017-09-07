@@ -13,11 +13,29 @@ The dataset used for this example is simulated credit card tansaction data. The 
 Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1OZ0k/view?usp=sharing
 ** note this needs to move so people can access outside of DSE G Drive **
 
+# Starting DSE with Search enabled
+
+To start DSE with Search enabled issue the following command:
+
+'dse cassandra -s'
+
+Once DSE has started, invoke the cqlsh command line tool:
+
+'clqsh'
+
+# Creating Schema with the the CREATE KEYSPACE command
+
+Keyspaces (or schemas) are the high-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed in which data centers (geographic or cloud). Also the level of replication and fault-tolernace the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
+
 `CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
+
+The use keyspace command can set the default keyspace for the session:
 
 `use dsbank;`
 
-`CREATE TABLE dsbank.transactions (
+# Create a DSE table
+
+```CREATE TABLE dsbank.transactions (
     cc_no text,
     transaction_time timestamp,
     amount double,
@@ -30,7 +48,7 @@ Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1
     transaction_id text,
     user_id text,
     PRIMARY KEY (cc_no, transaction_time)
-) WITH CLUSTERING ORDER BY (transaction_time DESC);`
+) WITH CLUSTERING ORDER BY (transaction_time DESC);```
 
 `COPY dsbank.transactions (cc_no, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
 
