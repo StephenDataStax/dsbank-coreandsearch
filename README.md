@@ -1,5 +1,3 @@
-# dsbank-coreandsearch
-
 # What is DSE Core and DSE Search?
 
 * DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup.
@@ -8,10 +6,12 @@ Enable real-time search with a single command
   * Search indexes are maintained with every insert, update, and delete operation.
   * Text/Fuzzy search, Faceting, Geospatial, Type ahead
 
+# Dataset used for the exmaple
 
-
+The dataset used for this example is simulated credit card tansaction data. The columns are credit card number, tansaction time, amount, items, location, merchant, notes, status, tag, transaction ID, and user ID.
 
 Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1OZ0k/view?usp=sharing
+** note this needs to move so people can access outside of DSE G Drive **
 
 `CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
 
