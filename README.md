@@ -17,11 +17,11 @@ Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1
 
 To start DSE with Search enabled issue the following command:
 
-'dse cassandra -s'
+`dse cassandra -s`
 
 Once DSE has started, invoke the cqlsh command line tool:
 
-'clqsh'
+`clqsh`
 
 # Creating Schema with the the CREATE KEYSPACE command
 
@@ -48,7 +48,9 @@ The use keyspace command can set the default keyspace for the session:
     transaction_id text,
     user_id text,
     PRIMARY KEY (cc_no, transaction_time)
-) WITH CLUSTERING ORDER BY (transaction_time DESC);```
+) WITH CLUSTERING ORDER BY (transaction_time DESC);
+```
+
 
 `COPY dsbank.transactions (cc_no, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
 
