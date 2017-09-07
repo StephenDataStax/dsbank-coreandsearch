@@ -1,6 +1,6 @@
 # What is DSE Core and DSE Search?
 
-* DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup.
+* DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup. DSE contain an easy to use, powerful data manipulation language called CQL which shares a lot of syntactical language freatures of SQL.
 * DSE Search is an integrated search engine that automatically sync with DML and requires no ETL.
 Enable real-time search with a single command
   * Search indexes are maintained with every insert, update, and delete operation.
@@ -19,13 +19,13 @@ To start DSE with Search enabled issue the following command:
 
 `dse cassandra -s`
 
-Once DSE has started, invoke the cqlsh command line tool:
+Once DSE has started, invoke the cqlsh client to interact with the database:
 
 `clqsh`
 
 # Creating Schema with the the CREATE KEYSPACE command
 
-Keyspaces (or schemas) are the high-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed in which data centers (geographic or cloud). Also the level of replication and fault-tolernace the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
+Keyspaces (or schemas) are the highest-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed (in which data centers, geographic or cloud), and Also the level of replication and fault-tolernace the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
 
 `CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
 
@@ -34,6 +34,13 @@ The use keyspace command can set the default keyspace for the session:
 `use dsbank;`
 
 # Create a DSE table
+
+To create a table with CQL, the developer will issues commands very similar to SQL. A Create TABLE statement is used, columns are defined with data types, and some distribution model is determined by the primamry key. Aditionally, clustering columns determine the sort order of the data. In this example, our PRIMARY KEY is cc_no and transaction_time. This combination is a unique indentifer for each row of data. The data is then stored DESC by transaction_time since most queries will want the latest transcations to appear first.
+
+Some  rules to remeber when create a table in DSE:
+* Every row in a DSE table must contain a unique primary key. The PK determines the primary key. 
+* Distribution of data is automatically controlled though PK.
+* The data can also be sorted with clustering columns (CK).
 
 ```CREATE TABLE dsbank.transactions (
     cc_no text,
@@ -51,8 +58,13 @@ The use keyspace command can set the default keyspace for the session:
 ) WITH CLUSTERING ORDER BY (transaction_time DESC);
 ```
 
+# Copying data into the table
+
+DSE has several mechanisms for data ingest. This example uses the COPY command to import the CSV file. With COPY, the target table is named, the columns structre is defined, and the source file is provided. Note, in this example, the data has a column hearder which is handled with the HEADER = TURE option.
 
 `COPY dsbank.transactions (cc_no, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
+
+# Querying data with CQL
 
 //select a specific account (primary key)
 
