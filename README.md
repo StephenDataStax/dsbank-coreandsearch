@@ -1,8 +1,7 @@
 # What is DSE Core and DSE Search?
 
 * DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup. DSE contain an easy to use, powerful data manipulation language called CQL which shares a lot of the syntactical language features of SQL.
-* DSE Search is an integrated search engine that automatically sync with DML and requires no ETL.
-Enable real-time search with a single command
+* DSE Search is an integrated search engine that automatically sync with changes in the data and requires no ETL.
   * Search indexes are maintained with every insert, update, and delete operation.
   * Text/Fuzzy search, Faceting, Geospatial, Type ahead
 
