@@ -37,7 +37,7 @@ The use keyspace command can set the default keyspace for the session:
 
 To create a table with CQL, the developer will issues commands very similar to SQL. A Create TABLE statement is used, columns are defined with data types, and some distribution model is determined by the primamry key. Aditionally, clustering columns determine the sort order of the data. In this example, our PRIMARY KEY is cc_no and transaction_time. This combination is a unique indentifer for each row of data. The data is then stored DESC by transaction_time since most queries will want the latest transcations to appear first.
 
-Some  rules to remeber when create a table in DSE:
+Some  rules to remeber when creating a table in DSE:
 * Every row in a DSE table must contain a unique primary key. The PK determines the primary key. 
 * Distribution of data is automatically controlled though PK.
 * The data can also be sorted with clustering columns (CK).
@@ -66,32 +66,46 @@ DSE has several mechanisms for data ingest. This example uses the COPY command t
 
 # Querying data with CQL
 
-//select a specific account (primary key)
+Querying data with CQL is very similmar to SQL. Data should be located using the PK and/or CK. The database is designed for fast lookup and transactions based on the PK.
+
+To select the transactions for a specific credit card:
 
 `select * from dsbank.transactions where cc_no = '1234123412341240' limit 10;`
 
-//count all transactions within a range of transaction_time (clustering column)
+To count all transactions within a range of transaction_time:
 
 `select count(transaction_id) from dsbank.transactions where cc_no = '1234123412341240' and transaction_time > '2017-09-01' and transaction_time < '2017-09-03';`
 
-//enable search
+# Enabling Search
+
+Search is an integrated part of the DSE platfrom. Only a single line of code is required to enable search.
 
 `CREATE SEARCH INDEX IF NOT EXISTS ON dsbank.transactions;`
 
-//search for the sum amount of all transactions at Macys in Atlanta
+Once search is enabled, the query flexability increases greatly. We can now search on any par of the record. To leverage serarch use the solr_query predicate as part of the where clause.
+
+To search for the sum amount of all transactions at Macys in Atlanta:
 
 `select sum (amount) from dsbank.transactions where solr_query = 'merchant:Macys location:Atlanta';`
 
-//search all cancelled transactions
+To search all cancelled transactions:
 
 `select count(*) from dsbank.transactions where solr_query = 'status:cancelled';`
 
-//insert a record
+# Real-time search
+
+As records are inserted, updated, or deleted the search indexes are automitcally updated.
+
+Let's search for any merchants that are McDonalds. Note there are 0 records returned.
+
+`select * from transactions where solr_query='merchant:mcdonalds';`
+
+Now insert a record with a merchant of MCDonalds:
 
 `INSERT INTO dsbank.transactions (cc_no, transaction_time, amount, location, merchant, notes, transaction_id, user_id)
   VALUES ('1234123412341240','2017-09-06 16:31:46.959+0000',58.32,'Tampa','McDonalds','HouseHold','31f4d4cc-8519-4982-be7b-b8aa06523ae3','banderson');`
 
-//search for new record
+Run the search query again and the newly inserted record will apppear:
 
 `select * from transactions where solr_query='merchant:mcdonalds';`
 
