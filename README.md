@@ -25,7 +25,7 @@ Once DSE has started, invoke the cqlsh client to interact with the database:
 
 # Creating schema with the CREATE KEYSPACE command
 
-Keyspaces (or schemas) are the highest-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed (in which data centers, geographic or cloud), and Also the level of replication and fault-tolerance the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
+Keyspaces (or schemas) are the highest-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed (in which data centers, geographic or cloud), and the level of replication and fault-tolerance the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
 
 `CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
 
