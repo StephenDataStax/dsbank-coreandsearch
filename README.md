@@ -1,5 +1,16 @@
 # dsbank-coreandsearch
 
+# What is DSE Core and DSE Search?
+
+* DSE Core is a scalable, distributed, fault-tolerant NoSQL database designed for real-time record lookup.
+* DSE Search is an integrated search engine that automatically sync with DML and requires no ETL.
+Enable real-time search with a single command
+  * Search indexes are maintained with every insert, update, and delete operation.
+  * Text/Fuzzy search, Faceting, Geospatial, Type ahead
+
+
+
+
 Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1OZ0k/view?usp=sharing
 
 `CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
