@@ -93,7 +93,7 @@ To search all cancelled transactions:
 
 `select count(*) from dsbank.transactions where solr_query = 'status:cancelled';`
 
-# Real-time search
+# Real-time search index updates
 
 As records are inserted, updated, or deleted the search indexes are automatically updated.
 
