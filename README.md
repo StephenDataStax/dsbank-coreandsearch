@@ -35,7 +35,7 @@ The use keyspace command can set the default keyspace for the session:
 
 # Create a DSE table
 
-To create a table with CQL, the developer will issue commands very similar to SQL. A CREATE TABLE statement is used, columns are defined with data types, and some data distribution model is determined by the primary key (PK). Additionally, clustering columns (CK) determine the sort order of the data. In this example, our PK is cc_no and transaction_time. This combination is a unique identifier for each row of data. The data is then stored DESC by the CK transaction_time since most queries will want the latest transactions to appear first.
+To create a table with CQL, the developer will issue commands very similar to SQL. A CREATE TABLE statement is issued, columns are defined with data types, and some data distribution method is determined by the primary key (PK). The rows of the table are automatically distributed bsed on a hash of the PK. Additionally, clustering columns (CK) determine the sort order of the table. In this example, the PK is cc_no and transaction_time. This combination is a unique identifier for each row of data, which is a requirement for the PK. The data is then stored DESC by the CK transaction_time since most queries will want the latest transactions to appear first.
 
 Some rules to remember when creating a table in DSE:
 * Every row in a DSE table must contain a unique primary key.
@@ -61,13 +61,13 @@ CREATE TABLE dsbank.transactions (
 
 # Copying data into the table
 
-DSE has several mechanisms for data ingest. This example uses the COPY command to import the CSV file. With COPY, the target table is named, the columns structure is defined, and the source file is provided. Note, in this example, the data has a column header which is handled with the HEADER = TURE option.
+DSE has several mechanisms for data ingest. This example uses the COPY command to import the sample CSV file provided with this example. With COPY, the target table is named, the column structure is defined, and the source file is provided. Note, in this example, the data has a column header which is handled with the HEADER = TRUE option.
 
 `COPY dsbank.transactions (cc_no, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
 
 # Querying data with CQL
 
-Querying data with CQL is very similar to SQL. Data should be located using the PK and/or CK. The database is designed for fast lookup and transactions based on the PK.
+Querying data with CQL is very similar to SQL. Data should be located using the PK for efficient lookup and ranges can be applied to the CK. The database is designed for fast lookup and transactions based on the PK.
 
 To select the transactions for a specific credit card:
 
