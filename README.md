@@ -10,8 +10,7 @@
 
 The dataset used for this example is simulated credit card transaction data. The columns are credit card number, transaction time, amount, items, location, merchant, notes, status, tag, transaction ID, and user ID.
 
-Dataset: https://drive.google.com/a/datastax.com/file/d/0B56saSJLWZYETnBvQUoxWi1OZ0k/view?usp=sharing
-** note this needs to move so people can access outside of DSE G Drive **
+Dataset: [dsbank.csv](https://github.com/StephenDataStax/dsbank-coreandsearch/blob/master/dsbank.csv)
 
 # Starting DSE with Search enabled
 
