@@ -98,7 +98,7 @@ As records are inserted, updated, or deleted the search indexes are automaticall
 
 Let's search for any merchants that are McDonalds. Note there are 0 records returned.
 
-`select * from transactions where solr_query='merchant:mcdonalds';`
+`select * from dsbank.transactions where solr_query='merchant:mcdonalds';`
 
 Now insert a record with a merchant of McDonalds:
 
@@ -107,7 +107,7 @@ Now insert a record with a merchant of McDonalds:
 
 Run the search query again and the newly inserted record will appear:
 
-`select * from transactions where solr_query='merchant:mcdonalds';`
+`select * from dsbank.transactions where solr_query='merchant:mcdonalds';`
 
 
 
