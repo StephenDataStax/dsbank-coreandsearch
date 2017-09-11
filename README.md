@@ -43,7 +43,7 @@ Some rules to remember when creating a table in DSE:
 
 ```
 CREATE TABLE dsbank.transactions (
-    cc_no text,
+    account_number text,
     transaction_time timestamp,
     amount double,
     items map<text, double>,
@@ -62,7 +62,7 @@ CREATE TABLE dsbank.transactions (
 
 DSE has several mechanisms for data ingest. This example uses the COPY command to import the sample CSV file provided with this example. With COPY, the target table is named, the column structure is defined, and the source file is provided. Note, in this example, the data has a column header which is handled with the HEADER = TRUE option.
 
-`COPY dsbank.transactions (cc_no, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
+`COPY dsbank.transactions (account_number, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
 
 # Querying data with CQL
 
@@ -70,11 +70,11 @@ Querying data with CQL is very similar to SQL. Data should be located using the 
 
 To select the transactions for a specific credit card:
 
-`select * from dsbank.transactions where cc_no = '1234123412341240' limit 10;`
+`select * from dsbank.transactions where account_number = '1234123412341240' limit 10;`
 
 To count all transactions within a range of transaction_time:
 
-`select count(transaction_id) from dsbank.transactions where cc_no = '1234123412341240' and transaction_time > '2017-09-01' and transaction_time < '2017-09-03';`
+`select count(transaction_id) from dsbank.transactions where account_number = '1234123412341240' and transaction_time > '2017-09-01' and transaction_time < '2017-09-03';`
 
 # Enabling Search
 
@@ -102,7 +102,7 @@ Let's search for any merchants that are McDonalds. Note there are 0 records retu
 
 Now insert a record with a merchant of McDonalds:
 
-`INSERT INTO dsbank.transactions (cc_no, transaction_time, amount, location, merchant, notes, transaction_id, user_id)
+`INSERT INTO dsbank.transactions (account_number, transaction_time, amount, location, merchant, notes, transaction_id, user_id)
   VALUES ('1234123412341240','2017-09-06 16:31:46.959+0000',58.32,'Tampa','McDonalds','HouseHold','31f4d4cc-8519-4982-be7b-b8aa06523ae3','banderson');`
 
 Run the search query again and the newly inserted record will appear:
