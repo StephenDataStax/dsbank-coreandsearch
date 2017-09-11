@@ -84,17 +84,17 @@ Search is an integrated part of the DSE platform. Only a single line of code is 
 
 Once search is enabled, the query flexibility increases greatly. We can now search on any part of the record. To leverage search use the solr_query predicate as part of the where clause.
 
-To search for the sum amount of all transactions at Macys in Atlanta:
+To search for all of Betty's transactions at Macys in Atlanta:
 
-`select sum (amount) from dsbank.transactions where solr_query = 'merchant:Macys location:Atlanta';`
+`select * from dsbank.transactions where solr_query = 'merchant:Macys location:Atlanta';`
 
-To search all cancelled transactions:
+To search all of Betty's cancelled transactions:
 
 `select count(*) from dsbank.transactions where solr_query = 'status:cancelled';`
 
 # Real-time search index updates
 
-As records are inserted, updated, or deleted the search indexes are automatically updated.
+As records are inserted, updated, or deleted the search indexes are automatically updated. This allow DataStax to offer real-time search without the need for an external culster and complex ETL operations.
 
 Let's search for any merchants that are McDonalds. Note there are 0 records returned.
 
