@@ -20,6 +20,8 @@ Betty is searching for a local bank branch. This will demonstrate Type Ahead and
 
 # Faceting:
 
+Betty is looking for locations of interest.
+
 1. Under the Map Facets (Discover) tab, a list of locations of interest will appear, grouped by number. Explain Betty is searching for one of these locations. Pick one of the locations of interest from the list and the locations will appear on the map.
 
 
