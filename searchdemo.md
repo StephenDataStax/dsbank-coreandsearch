@@ -12,7 +12,7 @@ Betty is searching for a local bank branch. This will demonstrate Type Ahead and
 
 Type ahead/Fuzzy Search:
 
-1. Under the Map Search (Find) tab, in the Search text box, Enter the text ```ban```. A list of local bank will appear. Explain how DSE incorporate type ahead and fuzzy search for this functionality. 
+1. Under the Map Search (Find) tab, in the Search text box, Enter the text ```bank```. A list of local bank will appear. Explain how DSE incorporate type ahead and fuzzy search for this functionality. 
 
 Geospatial search:
 
