@@ -68,13 +68,13 @@ DSE has several mechanisms for data ingest. This example uses the COPY command t
 
 Querying data with CQL is very similar to SQL. Data should be located using the PK for efficient lookup and ranges can be applied to the CK. The database is designed for fast lookup and transactions based on the PK.
 
-To select the transactions for a specific credit card:
+To see the transactions for Betty's account:
 
 `select * from dsbank.transactions where account_number = '1234123412341240' limit 10;`
 
-To count all transactions within a range of transaction_time:
+To see how much Betty spent over Labor Day weekend transactions within a range of transaction_time:
 
-`select count(transaction_id) from dsbank.transactions where account_number = '1234123412341240' and transaction_time > '2017-09-01' and transaction_time < '2017-09-03';`
+`select sum(amount) from dsbank.transactions where account_number = '1234123412341240' and transaction_time >= '2017-09-01' and transaction_time <= '2017-09-04';`
 
 # Enabling Search
 
