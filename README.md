@@ -54,7 +54,7 @@ CREATE TABLE dsbank.transactions (
     tags set<text>,
     transaction_id text,
     user_id text,
-    PRIMARY KEY (cc_no, transaction_time)
+    PRIMARY KEY (account_number, transaction_time)
 ) WITH CLUSTERING ORDER BY (transaction_time DESC);
 ```
 
