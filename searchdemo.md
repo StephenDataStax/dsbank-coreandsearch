@@ -2,6 +2,8 @@
 
 This Place Finder demo incorprates some of the notable features of DSE Search including type ahead, fuzzy search, geospatial search, and faceted search. This demo incorporates a graphical UI to demonstrate features.
 
+Contact Wei for demo URL.
+
 # Prior to demo:
 
 1. Per the narrative, move the user with the MOVE USER button. Move the user to the West Palm/Miami FL region. Note: place the user in a city location for the search to work.
