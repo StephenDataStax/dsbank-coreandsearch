@@ -1,6 +1,6 @@
 # Graph Demo
 
-Loading Data:
+# Loading Data:
 
 Note: this demo requires DSE 5.1.3 and DGL 5.1.3.
 
@@ -16,16 +16,13 @@ Navigate to the fraud directory. Using DGL, submit the following command to the 
 
 In DSE Studio, submit the ```addAddressEdges.groovy``` file. 
 
-
-
-
-Graph Demo:
+# Graph Demo:
 
 This demo will illustrate DSE's ability to detect fraud in real-time. The demo consists of three examples. 
 
-. Scenario 1: Legitimate - User registers and eventually places a order
-. Scenario 2: Suspicious - User registers and places an order with previously used device id (might be husband and wife)
-. Scenario 3: Fraud - User registers and places an order with highly used device id
+* Scenario 1: Legitimate - User registers and eventually places a order
+* Scenario 2: Suspicious - User registers and places an order with previously used device id (might be husband and wife)
+* Scenario 3: Fraud - User registers and places an order with highly used device id
 
 Scenario 1: Legitimate - User registers and eventually places a order
 
