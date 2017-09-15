@@ -24,6 +24,11 @@ This demo will illustrate DSE's ability to detect fraud in real-time. The demo c
 * Scenario 2: Suspicious - User registers and places an order with previously used device id (might be husband and wife)
 * Scenario 3: Fraud - User registers and places an order with highly used device id
 
+Demo Studio:
+Interface
+Schema tab
+...
+
 Scenario 1: Legitimate - User registers and eventually places a order
 
 Traversal to Visualize: ```g.V().has("customer", "customerid", "10000000-0000-0000-0000-000000000001").emit().repeat(both().simplePath()).times(4)```
