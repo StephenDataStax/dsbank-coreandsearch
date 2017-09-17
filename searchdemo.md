@@ -6,7 +6,7 @@ Contact Wei for demo URL.
 
 # Prior to demo:
 
-1. Per the narrative, move the user with the MOVE USER button. Move the user to the West Palm/Miami FL region. Note: place the user in a city location for the search to work.
+1. Per the narrative, move the user with the MOVE USER button. Move the user to the city portion of West Palm/Miami FL region. Note: place the user in a city location for the search to work.
 
 # Demo:
 
@@ -24,6 +24,6 @@ Betty is searching for a local bank branch. This will demonstrate Type Ahead and
 
 Betty is looking for locations of interest.
 
-1. Under the Map Facets (Discover) tab, a list of locations of interest will appear, grouped by number. Explain Betty is searching for one of these locations. Pick one of the locations of interest from the list and the locations will appear on the map.
+1. Under the Map Facets (Discover) tab, a list of locations of interest will appear, grouped by number. Explain Betty is searching for a bank. Scroll to bank in the facting list. Pick one of the locations of interest from the list and the locations will appear on the map with geospatial search.
 
 
