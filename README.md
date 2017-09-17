@@ -84,9 +84,9 @@ Search is an integrated part of the DSE platform. Only a single line of code is 
 
 Once search is enabled, the query flexibility increases greatly. We can now search on any part of the record. To leverage search use the solr_query predicate as part of the where clause.
 
-To search for all of Betty's transactions at Macys in Atlanta:
+To search for all of Betty's transactions at Macys in West Palm Beach. This is use a fuzzy search for West Palm Beach:
 
-`select * from dsbank.transactions where solr_query = 'merchant:Macys location:Atlanta';`
+`select * from dsbank.transactions where solr_query = 'merchant:Macys location:west*';`
 
 To search all of Betty's cancelled transactions:
 
