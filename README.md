@@ -8,7 +8,7 @@
 
 # Dataset used for the example
 
-The dataset used for this example is simulated credit card transaction data. The columns are credit card number, transaction time, amount, items, location, merchant, notes, status, tag, transaction ID, and user ID.
+The dataset used for this example is simulated credit card transaction data. The columns are account number, transaction time, amount, items, location, merchant, notes, status, tag, transaction ID, and user ID.
 
 Dataset: [dsbank.csv](https://github.com/StephenDataStax/dsbank-coreandsearch/blob/master/dsbank.csv)
 
@@ -62,7 +62,7 @@ CREATE TABLE dsbank.transactions (
 
 DSE has several mechanisms for data ingest. This example uses the COPY command to import the sample CSV file provided with this example. With COPY, the target table is named, the column structure is defined, and the source file is provided. Note, in this example, the data has a column header which is handled with the HEADER = TRUE option.
 
-`COPY dsbank.transactions (account_number, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;`
+```COPY dsbank.transactions (account_number, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dsbank.csv' WITH HEADER = TRUE ;```
 
 # Querying data with CQL
 
@@ -74,7 +74,7 @@ To see the transactions for Betty's account:
 
 To see how much Betty spent over Labor Day weekend transactions within a range of transaction_time:
 
-`select sum(amount) from dsbank.transactions where account_number = '1234123412341240' and transaction_time >= '2017-09-01' and transaction_time <= '2017-09-04';`
+```select sum(amount) from dsbank.transactions where account_number = '1234123412341240' and transaction_time >= '2017-09-01' and transaction_time <= '2017-09-04';```
 
 # Enabling Search
 
@@ -102,8 +102,8 @@ Let's search for any merchants that are McDonalds. Note there are 0 records retu
 
 Now insert a record with a merchant of McDonalds:
 
-`INSERT INTO dsbank.transactions (account_number, transaction_time, amount, location, merchant, notes, transaction_id, user_id)
-  VALUES ('1234123412341240','2017-09-06 16:31:46.959+0000',58.32,'Tampa','McDonalds','HouseHold','31f4d4cc-8519-4982-be7b-b8aa06523ae3','banderson');`
+```INSERT INTO dsbank.transactions (account_number, transaction_time, amount, location, merchant, notes, transaction_id, user_id)
+  VALUES ('1234123412341240','2017-09-06 16:31:46.959+0000',58.32,'Tampa','McDonalds','HouseHold','31f4d4cc-8519-4982-be7b-b8aa06523ae3','banderson');```
 
 Run the search query again and the newly inserted record will appear:
 
