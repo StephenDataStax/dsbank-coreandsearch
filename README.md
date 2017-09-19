@@ -12,17 +12,13 @@ The dataset used for this example is simulated credit card transaction data. The
 
 Dataset: [dsbank.csv](https://github.com/StephenDataStax/dsbank-coreandsearch/blob/master/dsbank.csv)
 
-# Starting DSE with Search enabled
-
-Invoke the cqlsh client to interact with the database:
-
-`clqsh`
-
 # Creating schema with the CREATE KEYSPACE command
 
 Keyspaces (or schemas) are the highest-level object in the database. They store a collection of tables or views. The keyspace determines how the data is distributed (in which data centers, geographic or cloud), and the level of replication and fault-tolerance the data should have. In this example, we have a single data center with a replication factor of 3 (3 copies of the data). 
 
-`CREATE KEYSPACE dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
+`CREATE KEYSPACE if not exists dsbank WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 3};`
+
+Note: The dsbank keyspae has already been created for this demo.
 
 The use keyspace command can set the default keyspace for the session:
 
@@ -37,8 +33,10 @@ Some rules to remember when creating a table in DSE:
 * Distribution of data is automatically controlled though PK.
 * The data can also be sorted with clustering columns (CK).
 
+Note: The table has been already created for this demo.
+
 ```
-CREATE TABLE dsbank.transactions (
+CREATE TABLE if not exists dsbank.transactions (
     account_number text,
     transaction_time timestamp,
     amount double,
@@ -58,6 +56,8 @@ CREATE TABLE dsbank.transactions (
 
 DSE has several mechanisms for data ingest. This example uses the COPY command to import the sample CSV file provided with this example. With COPY, the target table is named, the column structure is defined, and the source file is provided. Note, in this example, the data has a column header which is handled with the HEADER = TRUE option.
 
+Note: The data has been pre loaded for this demo.
+
 ```
 COPY dsbank.transactions (account_number, transaction_time, amount, items, location, merchant, notes, status, tags, transaction_id, user_id) FROM '/tmp/dse-halfday-workshop/resources/cql/dsbank.csv' WITH HEADER = TRUE ;
 ```
@@ -76,6 +76,12 @@ To see how much Betty spent over Labor Day weekend transactions within a range o
 select sum(amount) from dsbank.transactions where account_number = '1234123412341240' and transaction_time >= '2017-09-01' and transaction_time <= '2017-09-04';
 ```
 
+To see how many transactions have occured to date in September:
+
+```
+select count(*) from dsbank.transactions where account_number = '1234123412341240' and transaction_time >= '2017-09-01'
+```
+
 # Enabling Search
 
 Search is an integrated part of the DSE platform. Only a single line of code is required to enable search:
@@ -86,7 +92,7 @@ Once search is enabled, the query flexibility increases greatly. We can now sear
 
 To search for all of Betty's transactions at Macys in West Palm Beach. This is use a fuzzy search for West Palm Beach:
 
-`select * from dsbank.transactions where solr_query = 'merchant:Macys location:west*';`
+`select * from dsbank.transactions where solr_query = 'merchant:Macys location:West*';`
 
 To search all of Betty's cancelled transactions:
 
