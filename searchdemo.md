@@ -24,6 +24,6 @@ Betty is searching for a local bank branch. This will demonstrate Type Ahead and
 
 Betty is looking for locations of interest.
 
-1. Under the Map Facets (Discover) tab, a list of locations of interest will appear, grouped by number. Explain Betty is searching for a bank. Scroll to bank in the facting list. Pick one of the locations of interest from the list and the locations will appear on the map with geospatial search.
+1. Under the Map Facets (Discover) tab, a list of locations of interest will appear, grouped by number. Explain Betty is searching for an ATM. Scroll to Banking and Credit Union section in the facting list. Pick ATM from the list and the locations will appear on the map with geospatial search.
 
 
