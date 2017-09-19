@@ -4,10 +4,6 @@ This Place Finder demo incorprates some of the notable features of DSE Search in
 
 Contact Wei for demo URL.
 
-# Prior to demo:
-
-1. Per the narrative, move the user with the MOVE USER button. Move the user to the city portion of West Palm/Miami FL region. Note: place the user in a city location for the search to work.
-
 # Demo:
 
 Betty is searching for a local bank branch. This will demonstrate Type Ahead and Geospatial search.
